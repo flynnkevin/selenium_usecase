@@ -27,6 +27,26 @@ def login_iteye_by_selenium():
     # time.sleep(100)
     print browser.get_cookies()
 
+
+def login_iteye_by_phantomjs():
+    url = "http://www.iteye.com/login"
+    user = "kevinflynn"
+    password = "maoshan2011215858"
+    browser = webdriver.PhantomJS()
+    browser.get(url)
+    usename = browser.find_element_by_xpath('//*[@id="user_name"]')
+    pwd = browser.find_element_by_xpath('//*[@id="password"]')
+    usename.send_keys(user)
+    pwd.send_keys(password)
+    login = WebDriverWait(browser, 5).until(
+        expected_conditions.presence_of_element_located((By.XPATH, '//*[@id="button"]')))
+    login.click()
+    import time
+    time.sleep(5)
+    browser.get("http://www.iteye.com/blogs")
+    # time.sleep(100)
+    print browser.get_cookies()
+
 if __name__ == '__main__':
     login_iteye_by_selenium()
 
